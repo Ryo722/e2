@@ -11,32 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :price %>
-    <%= form.number_field :price %>
+    <%= form.number_field :price, class: "form-control", placeholder: '半角数字'%>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :stock %>
-    <%= form.number_field :stock %>
+    <%= form.number_field :stock, class: "form-control", placeholder: '半角数字'%>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :note %>
-    <%= form.text_area :note %>
+    <%= form.text_area :note, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :showing %>
+  <div class="form-group">
+    <%= form.label :showing %>する
     <%= form.check_box :showing %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit, class: "btn btn-default" %>
   </div>
 <% end %>

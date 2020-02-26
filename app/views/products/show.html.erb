@@ -1,29 +1,35 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
 
 <p>
-  <strong>Name:</strong>
+  <strong>商品名:</strong>
   <%= @product.name %>
 </p>
 
 <p>
-  <strong>Price:</strong>
-  <%= @product.price %>
+  <strong>価格:</strong>
+  <%= number_to_currency(@product.try(:price), precision: 0, unit: "円") %>
 </p>
 
 <p>
-  <strong>Stock:</strong>
-  <%= @product.stock %>
+  <strong>在庫:</strong>
+  <%= number_to_currency(@product.try(:stock), precision: 0, unit: "個") %>
 </p>
 
 <p>
-  <strong>Note:</strong>
+  <strong>備考:</strong>
   <%= @product.note %>
 </p>
 
 <p>
-  <strong>Showing:</strong>
-  <%= @product.showing %>
+  <strong>販売:</strong>
+  <%= @product.showing? ? '可能' : '不可' %>
 </p>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<%= link_to '編集', edit_product_path(@product), class: 'btn btn-default' %> |
+<%= link_to '削除', products_path, class: 'btn btn-default' %>
+<%= link_to '新規登録', new_product_path(@product), class: 'btn btn-default' %>

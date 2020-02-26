@@ -1,6 +1,6 @@
-<h1>Editing Product</h1>
+<h2>商品編集</h2>
 
 <%= render 'form', product: @product %>
 
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>
+<%= link_to '詳細', @product, class: 'btn btn-default' %> |
+<%= link_to '戻る', products_path, class: 'btn btn-default' %>
