@@ -12,28 +12,47 @@
   <% end %>
 
   <h2 class="sub-header">商品</h2>
-
-  <p>
-    <strong>商品名：</strong>
-    <%= product.name %>
-  </p>
-
-  <p>
-    <strong>価格：</strong>
-     <%= number_to_currency(product.try(:price), precision: 0, unit: "円") %>
-  </p>
+  <ul class="list-group">
+    <% cart.line_items.each do |line_item| %>
+      <li class="list-group-item">
+        <p>
+          <strong>商品名:</strong>
+          <%= line_item.product.name %>
+        </p>
+        <p>
+          <strong>個数:</strong>
+          <%= number_to_currency(line_item.quantity, precision: 0, unit: "個") %>
+        </p>
+        <p>
+          <strong>小計金額:</strong>
+          <%= number_to_currency(line_item.total_price, precision: 0, unit: "円") %>
+        </p>
+      </li>
+    <% end %>
+    <li class="list-group-item">
+      <p>
+        <strong>合計金額:</strong>
+        <%= number_to_currency(cart.total_price, precision: 0, unit: "円") %>
+      </p>
+    </li>
+  </ul>
 
   <h2 class="sub-header">お客様情報</h2>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <p>
+        <strong>氏名:</strong>
+        <%= current_user.name %>
+      </p>
+    </li>
 
-  <p>
-    <strong>氏名：</strong>
-    <%= current_user.name %>
-  </p>
-
-  <p>
-    <strong>メールアドレス:</strong>
-    <%= current_user.email %>
-  </p>
+    <li class="list-group-item">
+      <p>
+        <strong>メールアドレス:</strong>
+        <%= current_user.email %>
+      </p>
+    </li>
+  </ul>
 
   <div class="form-group">
     <%= form.label :shipping_address %>
@@ -41,7 +60,6 @@
   </div>
 
   <%= form.hidden_field :user_id, value: current_user.id %>
-  <%= form.hidden_field :product_id, value: product.id %>
 
   <div class="actions">
     <%= form.submit '購入確定', class: "btn btn-success", data: { confirm: 'この内容で購入してもよろしいですか？ ' } %>

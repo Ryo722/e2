@@ -31,7 +31,7 @@
           <td><%= link_to '詳細', product %></td>
           <td><%= link_to '編集', edit_product_path(product) %></td>
           <td><%= link_to '削除', product, method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
-          <td><%= link_to '購入', new_order_path(product_id: product.id), class: 'btn btn-primary' %></td>
+          <td><%= link_to '購入', line_items_path(product_id: product.id), method: :post, class: 'btn btn-primary' %></td>
         </tr>
       <% end %>
     </tbody>
