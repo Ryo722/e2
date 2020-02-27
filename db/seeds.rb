@@ -8,6 +8,5 @@
 
 admin = User.where(email: 'tarou@example.com')
 unless admin.present?
-  User.create(email: 'tarou@example.com', password: 'hogehoge',
-        password_confirmation: 'hogehoge')
+  User.create(name: 'Admin', email: 'tarou@example.com', password: 'hogehoge', password_confirmation: 'hogehoge', role: 'admin')
 end

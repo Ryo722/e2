@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    _user_params = user_params.permit(:email, :password, :password_confirmation)
+    _user_params = user_params
     _user_params.delete(:password) if user_params[:password].blank?
     _user_params.delete(:password_confirmation) if user_params[:password_confirmation].blank?
 
@@ -74,6 +74,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.fetch(:user, {})
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
     end
 end

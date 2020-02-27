@@ -1,5 +1,78 @@
 <!DOCTYPE html>
 <html>
+   <head>
+      <title>Calmcap</title>
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <!-- TODO add these as assets -->
+      <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+      <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+      <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+   </head>
+   <body>
+      <div class="container">
+         <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="/">Calmcap</a>
+            <p class="navbar-text pull-right">
+               <% if user_signed_in? %>
+               Userid: <%= current_user.id %> / Logged in as <strong><%= current_user.email %></strong>.
+               <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+               <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+               <% else %>
+               <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+               <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+               <% end %>
+            </p>
+         </nav>
+         <div class="row">
+            <% if notice %>
+              <p class="alert alert-success"><%= notice %></p>
+            <% end %>
+            <% if alert %>
+             <p class="alert alert-danger"><%= alert %></p>
+            <% end %>
+            <div class="col-sm-4 col-md-3 sidebar">
+               <div class="mini-submenu">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+               </div>
+               <div class="list-group">
+                  <a href="#" class="list-group-item">
+                  <i class="fa fa-comment-o"></i> Lorem ipsum
+                  </a>
+                  <a href="#" class="list-group-item">
+                  <i class="fa fa-search"></i> Lorem ipsum
+                  </a>
+                  <a href="#" class="list-group-item">
+                  <i class="fa fa-user"></i> Lorem ipsum
+                  </a>
+                  <a href="#" class="list-group-item">
+                  <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                  <i class="fa fa-bar-chart-o"></i> Lorem ipsumr <span class="badge">14</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                  <i class="fa fa-envelope"></i> Lorem ipsum
+                  </a>
+               </div>
+            </div>
+            <div class="col-sm-8 col-md-9">
+               <!--Body content-->
+              <%= yield %>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
   <head>
     <title>Es2</title>
     <%= csrf_meta_tags %>
@@ -48,4 +121,55 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
   </body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eshop</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+
+  <body>
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Es2</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">Sign out</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-3 col-md-2 sidebar">
+            <% if user_signed_in? %>
+              <ul class="nav nav-sidebar">
+                <li class="<%= active_class('products') %>"><%= link_to 'Products', products_path %></li>
+                <li class="<%= active_class('users') %>"><%= link_to 'Users', users_path %></li>
+              </ul>
+            <% end %>
+          </div>
+          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    </body>
 </html>
