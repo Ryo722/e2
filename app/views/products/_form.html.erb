@@ -12,31 +12,31 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :name %>
+    <%= form.label :商品名 %>
     <%= form.text_field :name, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :price %>
+    <%= form.label :価格 %>
     <%= form.number_field :price, class: "form-control", placeholder: '半角数字'%>
   </div>
 
   <div class="form-group">
-    <%= form.label :stock %>
+    <%= form.label :在庫 %>
     <%= form.number_field :stock, class: "form-control", placeholder: '半角数字'%>
   </div>
 
   <div class="form-group">
-    <%= form.label :note %>
+    <%= form.label :備考 %>
     <%= form.text_area :note, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :showing %>する
+    <%= form.label :販売 %>する
     <%= form.check_box :showing %>
   </div>
 
   <div class="actions">
-    <%= form.submit, class: "btn btn-default" %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>
