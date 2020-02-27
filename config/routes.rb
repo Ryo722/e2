@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  resources :users
   resources :products do
     resources :taggings, only: [:new, :edit, :create, :update, :destroy]
   end
