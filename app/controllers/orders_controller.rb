@@ -38,14 +38,14 @@ class OrdersController < ApplicationController
     respond_to do |format|
       @cart.destroy
       session[:cart_id] = nil
-      format.html { redirect_to products_url, notice: 'Order was successfully created.' }
+      format.html { redirect_to products_url, notice: '注文が完了しました.' }
       format.json { render :show, status: :created, location: @order }
     end
-  # rescue
-  #   respond_to do |format|
-  #     format.html { render :new }
-  #     format.json { render json: @order.errors, status: :unprocessable_entity }
-  #   end
+  rescue
+    respond_to do |format|
+      format.html { render :new }
+      format.json { render json: @order.errors, status: :unprocessable_entity }
+    end
   end
 
   # PATCH/PUT /orders/1
@@ -53,7 +53,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to @order, notice: '注文が更新されました.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -67,7 +67,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to orders_url, notice: '注文内容が削除されました.' }
       format.json { head :no_content }
     end
   end

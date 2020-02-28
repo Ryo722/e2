@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
         products_path
     end
 
+    #ログアウト後はログイン画面に遷移
+    def after_sign_out_path_for(resource)
+        '/users/sign_in'
+    end
+
     private
 
     def current_cart

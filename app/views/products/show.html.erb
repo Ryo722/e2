@@ -10,26 +10,32 @@
   <%= @product.name %>
 </p>
 
-<p>
-  <strong>価格:</strong>
-  <%= number_to_currency(@product.try(:price), precision: 0, unit: "円") %>
-</p>
+<ul class="list-group">
+  <li class="list-group-item">
+    <p>
+      <strong>価格:</strong>
+      <%= number_to_currency(@product.try(:price), precision: 0, unit: "円") %>
+    </p>
 
-<p>
-  <strong>在庫:</strong>
-  <%= number_to_currency(@product.try(:stock), precision: 0, unit: "個") %>
-</p>
+    <p>
+      <strong>在庫:</strong>
+      <%= number_to_currency(@product.try(:stock), precision: 0, unit: "個") %>
+    </p>
 
-<p>
-  <strong>備考:</strong>
-  <%= @product.note %>
-</p>
+    <p>
+      <strong>備考:</strong>
+      <%= @product.note %>
+    </p>
 
-<p>
-  <strong>販売:</strong>
-  <%= @product.showing? ? '可能' : '不可' %>
-</p>
+    <p>
+      <strong>販売:</strong>
+      <%= @product.showing? ? '可能' : '不可' %>
+    </p>
+  </li>
+</ul>
 
+<%= link_to 'カートに入れる', line_items_path(product_id: @product.id), method: :post, class: 'btn btn-primary' %>
 <%= link_to '編集', edit_product_path(@product), class: 'btn btn-link' %> |
 <%= link_to '戻る', products_path, class: 'btn btn-link' %> |
 <%= link_to '新規登録', new_product_path(@product), class: 'btn btn-link' %>
+

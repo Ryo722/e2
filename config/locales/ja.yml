@@ -1,5 +1,10 @@
 ---
 ja:
+  user:
+    admin: '管理者'
+    general: '一般'
+  order:
+    shipping _address: 配送先
   activerecord:
     attributes:
       user:
