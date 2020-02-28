@@ -5,7 +5,7 @@ class Order < ApplicationRecord
 
   def checkout(cart)
     cart.line_items.each do |line_item|
-      order_details.build(product_id: line_item.product_id, quantity: line_item.quantity)
+      order_details.build(product_id: line_item.product_id, quantity: line_item.quantity, product: line_item.product)
     end
     save!
   end

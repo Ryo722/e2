@@ -1,16 +1,25 @@
 ---
 ja:
-  admin: '管理者'
-  general: '一般'
   activerecord:
+    attributes:
+      user:
+        admin: '管理者'
+        general: '一般'
+      order:
+        shipping _address: 配送先
+        status: 状況
+    enum:
+      order:
+        status:
+          order_accepted: 注文受付
+          paid: 入金済み
+          delivered: 配送済み
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
-  order:
-    shipping _address: 配送先
   date:
     abbr_day_names:
     - 日
