@@ -17,10 +17,11 @@ class OrdersController < ApplicationController
   def new
     @cart = current_cart
     if @cart.line_items.empty?
-      redirect_to products_index_url
+      redirect_to products_url
       return
     end
     @order = Order.new
+    render :layout => 'front'
   end
 
   # GET /orders/1/edit
@@ -37,7 +38,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       @cart.destroy
       session[:cart_id] = nil
-      format.html { redirect_to products_index_url, notice: 'Order was successfully created.' }
+      format.html { redirect_to products_url, notice: 'Order was successfully created.' }
       format.json { render :show, status: :created, location: @order }
     end
   rescue
