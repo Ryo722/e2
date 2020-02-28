@@ -1,0 +1,64 @@
+<% if order.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+    <ul>
+    <% order.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2 class="sub-header">注文内容</h2>
+
+<ul class="list-group">
+  <% order.order_details.each do |item| %>
+    <li class="list-group-item">
+      <p>
+        <strong>商品名:</strong>
+        <%= item.product.name %>
+      </p>
+      <p>
+        <strong>個数:</strong>
+         <%= number_to_currency(item.quantity, precision: 0, unit: "個") %>
+      </p>
+      <p>
+        <strong>小計金額:</strong>
+         <%= number_to_currency(item.total_price, precision: 0, unit: "円") %>
+      </p>
+    </li>
+  <% end %>
+  <li class="list-group-item">
+    <p>
+      <strong>合計金額:</strong>
+      <%= number_to_currency(order.total_price, precision: 0, unit: "円") %>
+    </p>
+  </li>
+  <li class="list-group-item">
+    <p>
+      <strong>氏名:</strong>
+      <%= order.user.name %>
+    </p>
+  </li>
+
+  <li class="list-group-item">
+    <p>
+      <strong>メールアドレス:</strong>
+      <%= order.user.email %>
+    </p>
+  </li>
+
+  <li class="list-group-item">
+    <p>
+      <strong>状況:</strong>
+      <%= I18n.t order.status, scope: 'activerecord.enum.order.status' %>
+    </p>
+  </li>
+</ul>
+
+<% if order.order_accepted? %>
+  <%= button_to '入金確認', orders_management_confirm_payment_path(order.id), params: { id: order.id }, method: :put, class: 'btn btn-default' %>
+<% elsif order.paid? %>
+  <%= button_to '配送', orders_management_deliver_path(order.id), params: { id: order.id }, method: :put, class: 'btn btn-default' %>
+<% end %>
