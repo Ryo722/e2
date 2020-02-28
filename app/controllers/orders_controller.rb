@@ -41,11 +41,11 @@ class OrdersController < ApplicationController
       format.html { redirect_to products_url, notice: 'Order was successfully created.' }
       format.json { render :show, status: :created, location: @order }
     end
-  rescue
-    respond_to do |format|
-      format.html { render :new }
-      format.json { render json: @order.errors, status: :unprocessable_entity }
-    end
+  # rescue
+  #   respond_to do |format|
+  #     format.html { render :new }
+  #     format.json { render json: @order.errors, status: :unprocessable_entity }
+  #   end
   end
 
   # PATCH/PUT /orders/1

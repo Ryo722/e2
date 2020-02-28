@@ -5,7 +5,7 @@ class OrderMailer < ApplicationMailer
   #
   #   en.order_mailer.completed_mail.subject
   #
-  def completed_mail
+  def completed_mail(order)
     @order = order
     mail to: order.user.email, subject: 'ご注文完了のお知らせ'
   end

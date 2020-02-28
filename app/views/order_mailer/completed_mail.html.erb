@@ -8,7 +8,7 @@
 
 <ul>
   <% @order.order_details.each do |item| %>
-    <li>タイトル:<%= item.product.title %></li>
+    <li>タイトル:<%= item.product.name %></li>
     <li>金額:<%= item.product.price %> 円</li>
     <li>－－－－－－－－－－－－－－－－－</li>
     <li>個数:<%= item.quantity %> 個</li>
