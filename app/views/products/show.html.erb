@@ -34,8 +34,17 @@
   </li>
 </ul>
 
-<%= link_to 'カートに入れる', line_items_path(product_id: @product.id), method: :post, class: 'btn btn-primary' %>
-<%= link_to '編集', edit_product_path(@product), class: 'btn btn-link' %> |
+<% if user_signed_in? %>
+  <% if current_user.admin_flg? %>
+    <%= link_to '編集', edit_product_path(@product), class: 'btn btn-link' %> |
+  <% else %>
+    <%= link_to 'カートに入れる', line_items_path(product_id: @product.id), method: :post, class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
 <%= link_to '戻る', products_path, class: 'btn btn-link' %> |
-<%= link_to '新規登録', new_product_path(@product), class: 'btn btn-link' %>
+<% if user_signed_in? %>
+  <% if current_user.admin_flg? %>
+    <%= link_to '新規登録', new_product_path(@product), class: 'btn btn-link' %>
+  <% end %>
+<% end %>
 

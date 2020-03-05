@@ -1,7 +1,9 @@
 class Order < ApplicationRecord
   belongs_to :user
-  has_many :order_details
+  has_many :order_details, dependent: :destroy
   after_commit :send_order_mail, on: :create
+  has_many :products, dependent: :destroy
+
   include AASM
   enum status: { order_accepted: 0, paid: 1, delivered: 2 }
   aasm column: :status do

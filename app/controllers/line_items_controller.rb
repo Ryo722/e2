@@ -53,12 +53,21 @@ class LineItemsController < ApplicationController
     end
   end
 
+  # def product_out(product_id)
+  #   product = line_item.find(id: product_id)
+  #   product.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to line_items_url, notice: 'カート内の商品が削除されました' }
+  #     format.json { head :no_content }
+  #   end
+  # end
+
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
     @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to line_items_url, notice: 'カート内の商品一覧が削除されました' }
+      format.html { redirect_to line_items_url, notice: 'カート内の商品が削除されました' }
       format.json { head :no_content }
     end
   end

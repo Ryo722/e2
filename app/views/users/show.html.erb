@@ -10,6 +10,19 @@
   <%= @user.email %>
 </p>
 
-<%= link_to '編集', edit_user_path(@user), class: 'btn btn-link' %> |
+<p>
+  <strong>権限:</strong>
+  <%= current_user.admin_flg? ? '管理者' : '一般' %>
+</p>
+
+<% if user_signed_in? %>
+  <% if current_user.admin_flg? %>
+    <%= link_to '編集', edit_user_path(@user), class: 'btn btn-link' %> |
+  <% end %>
+<% end %>
 <%= link_to '戻る', users_path, class: 'btn btn-link' %> |
-<%= link_to '新規登録', new_user_path(@user), class: 'btn btn-link' %>
+<% if user_signed_in? %>
+  <% if current_user.admin_flg? %>
+    <%= link_to '新規登録', new_user_path(@user), class: 'btn btn-link' %>
+  <% end %>
+<% end %>

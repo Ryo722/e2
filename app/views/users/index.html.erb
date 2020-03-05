@@ -21,8 +21,12 @@
       <tr>
         <td><%= user.email %></td>
         <td><%= link_to '詳細', user %></td>
-        <td><%= link_to '編集', edit_user_path(user) %></td>
-        <td><%= link_to '削除', user, method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
+        <% if user_signed_in? %>
+          <% if current_user.admin_flg? %>
+            <td><%= link_to '編集', edit_user_path(user) %></td>
+            <td><%= link_to '削除', user, method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
+          <% end %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +34,8 @@
 
 <br>
 
-<%= link_to 'ユーザー新規登録', new_user_path , class: 'btn btn-primary' %>
+<% if user_signed_in? %>
+  <% if current_user.admin_flg? %>
+    <%= link_to 'ユーザー新規登録', new_user_path , class: 'btn btn-primary' %>
+  <% end %>
+<% end %>

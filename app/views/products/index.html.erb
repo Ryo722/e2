@@ -29,9 +29,14 @@
           <td><%= product.note %></td>
           <td><%= product.showing? ? '可能' : '不可' %></td>
           <td><%= link_to '詳細', product %></td>
-          <td><%= link_to '編集', edit_product_path(product) %></td>
-          <td><%= link_to '削除', product, method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
-          <td><%= link_to 'カートに入れる', line_items_path(product_id: product.id), method: :post, class: 'btn btn-primary' %></td>
+          <% if user_signed_in? %>
+            <% if current_user.admin_flg? %>
+              <td><%= link_to '編集', edit_product_path(product) %></td>
+              <td><%= link_to '削除', product, method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
+            <% else %>
+              <td><%= link_to 'カートに入れる', line_items_path(product_id: product.id), method: :post, class: 'btn btn-primary' %></td>
+            <% end %>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
@@ -40,4 +45,8 @@
 
 <br>
 
-<%= link_to '新規登録', new_product_path, class: 'btn btn-primary' %>
+<% if user_signed_in? %>
+  <% if current_user.admin_flg? %>
+    <%= link_to '新規登録', new_product_path, class: 'btn btn-primary' %>
+    <% end %>
+<% end %>
